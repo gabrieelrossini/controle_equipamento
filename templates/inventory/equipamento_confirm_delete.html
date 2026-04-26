@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Confirmar exclusão</h1>
+<p>Tem certeza de que deseja excluir o equipamento "{{ object.nome }}"?</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Excluir</button>
+    <a class="btn btn-secondary" href="{% url 'equipamento_list' %}">Cancelar</a>
+</form>
+{% endblock %}

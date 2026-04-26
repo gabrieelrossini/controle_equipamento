@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h1>{{ sala.nome }}</h1>
+    <a class="btn btn-secondary" href="{% url 'sala_list' %}">Voltar</a>
+</div>
+<p>{{ sala.descricao }}</p>
+
+<div class="mb-3">
+    <a class="btn btn-success" href="{% url 'equipamento_create' %}?sala={{ sala.id }}"><i class="bi bi-plus-circle"></i> Adicionar Equipamento</a>
+</div>
+
+<h2>Equipamentos</h2>
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Status</th>
+            <th>Atualizado em</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for equipamento in equipamentos %}
+        <tr>
+            <td>{{ equipamento.nome }}</td>
+            <td>
+                {% if equipamento.status.nome == "✅ Operante" %}
+                    <span class="badge bg-success">OK</span>
+                {% elif equipamento.status.nome == "⚠️ Parcialmente" %}
+                    <span class="badge bg-warning text-dark">Parcialmente</span>
+                {% elif equipamento.status.nome == "❌ Inoperante" %}
+                    <span class="badge bg-danger">Sem funcionamento</span>
+                {% endif %}
+            </td>
+            <td>{{ equipamento.data_atualizacao|date:"d/m/Y H:i" }}</td>
+            <td>
+                <a class="btn btn-sm btn-primary" href="{% url 'equipamento_update' equipamento.pk %}"><i class="bi bi-pencil"></i> Editar</a>
+                <a class="btn btn-sm btn-danger" href="{% url 'equipamento_delete' equipamento.pk %}"><i class="bi bi-trash"></i> Excluir</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4">Nenhum equipamento registrado nesta sala.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

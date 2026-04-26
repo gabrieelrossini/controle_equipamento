@@ -1,0 +1,26 @@
+[
+  {
+    "model": "inventory.status",
+    "pk": 1,
+    "fields": {
+      "nome": "✅ Operante",
+      "descricao": "Equipamento funcionando normalmente." 
+    }
+  },
+  {
+    "model": "inventory.status",
+    "pk": 2,
+    "fields": {
+      "nome": "❌ Inoperante",
+      "descricao": "Equipamento fora de uso." 
+    }
+  },
+  {
+    "model": "inventory.status",
+    "pk": 3,
+    "fields": {
+      "nome": "⚠️ Parcialmente",
+      "descricao": "Equipamento funcionando, mas com limitações." 
+    }
+  }
+]

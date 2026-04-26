@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h1>Salas</h1>
+    <a class="btn btn-success" href="{% url 'sala_create' %}"><i class="bi bi-plus-circle"></i> Nova Sala</a>
+</div>
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>Sala</th>
+            <th>Descrição</th>
+            <th>Status dos Equipamentos</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in salas_with_counts %}
+        <tr>
+            <td><a href="{% url 'sala_detail' item.sala.pk %}">{{ item.sala.nome }}</a></td>
+            <td>{{ item.sala.descricao }}</td>
+            <td>
+                {% with counts=item.counts %}
+                    {% if counts.operante %}
+                        <span class="badge bg-success">{{ counts.operante }} OK</span>
+                    {% endif %}
+                    {% if counts.parcial %}
+                        <span class="badge bg-warning text-dark">{{ counts.parcial }} Parcialmente</span>
+                    {% endif %}
+                    {% if counts.inoperante %}
+                        <span class="badge bg-danger">{{ counts.inoperante }} Sem funcionamento</span>
+                    {% endif %}
+                    {% if not counts.operante and not counts.parcial and not counts.inoperante %}
+                        Nenhum equipamento
+                    {% endif %}
+                {% endwith %}
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="3">Nenhuma sala cadastrada.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
