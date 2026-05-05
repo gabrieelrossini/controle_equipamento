@@ -10,6 +10,7 @@
         <tr>
             <th>Nome</th>
             <th>Descrição</th>
+            <th>Ações</th>
         </tr>
     </thead>
     <tbody>
@@ -17,6 +18,10 @@
         <tr>
             <td>{{ status.nome }}</td>
             <td>{{ status.descricao }}</td>
+            <td>
+                <a href="{% url 'status_update' status.pk %}" class="btn btn-sm btn-primary">Editar</a>
+                <a href="{% url 'status_delete' status.pk %}" class="btn btn-sm btn-danger">Excluir</a>
+            </td>
         </tr>
         {% empty %}
         <tr>

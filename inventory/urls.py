@@ -8,8 +8,12 @@ from .views import (
     SalaCreateView,
     SalaDetailView,
     SalaListView,
+    SalaUpdateView,
+    SalaDeleteView,
     StatusCreateView,
     StatusListView,
+    StatusUpdateView,
+    StatusDeleteView,
 )
 
 urlpatterns = [
@@ -22,4 +26,8 @@ urlpatterns = [
     path("salas/novo/", SalaCreateView.as_view(), name="sala_create"),
     path("statuses/", StatusListView.as_view(), name="status_list"),
     path("statuses/novo/", StatusCreateView.as_view(), name="status_create"),
+    path("salas/<int:pk>/editar/", SalaUpdateView.as_view(), name="sala_update"),
+    path("salas/<int:pk>/excluir/", SalaDeleteView.as_view(), name="sala_delete"),
+    path("statuses/<int:pk>/editar/", StatusUpdateView.as_view(), name="status_update"),
+    path("statuses/<int:pk>/excluir/", StatusDeleteView.as_view(), name="status_delete"),
 ]
